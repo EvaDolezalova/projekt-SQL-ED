@@ -1,4 +1,4 @@
-CREATE TABLE t_Eva_Dolezalova_project_SQL_primary_final
+CREATE TABLE t_Eva_Dolezalova_project_SQL_primary_final AS
 SELECT
   	cp.id,
 	cp.value, 
@@ -42,4 +42,9 @@ LEFT JOIN czechia_price_category cpc ON cp.category_code = cpc.code
 LEFT JOIN czechia_region cr ON cp.region_code = cr.code;
 
 
-SELECT 
+SELECT *
+FROM t_eva_dolezalova_project_sql_primary_final tedpspf
+WHERE odvetvi IS Null
+
+
+
