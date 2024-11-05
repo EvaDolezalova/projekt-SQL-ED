@@ -1,4 +1,4 @@
---Druhá tabulka
+-- Druhá tabulka
 
 CREATE TABLE t_eva_dolezalova_project_SQL_secondary_final AS
 SELECT
@@ -18,4 +18,6 @@ e.YEAR AS rok
 FROM (SELECT * FROM countries WHERE continent = 'Europe')c
 INNER JOIN economies e ON c.country = e.country
 WHERE year BETWEEN 2006 AND 2018; 
+
+
 
