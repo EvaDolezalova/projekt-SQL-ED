@@ -21,15 +21,16 @@ Kulturní, zábavní a rekreační činnosti
 Ostatní činnosti*/
 
 
-CREATE VIEW v_odvetviA as
+   CREATE VIEW v_odvetvi_vse AS
 SELECT kod_odvetvi, odvetvi, rok, round(avg(value),0) AS prumerna_mzda
   FROM t_eva_dolezalova_project_sql_primary_final tedpspf 
-       WHERE tedpspf.kod_odvetvi = 'A'
+       WHERE tedpspf.kod_odvetvi BETWEEN 'A'AND 'S'
         AND rok IN ('2006', '2007', '2008','2009', '2010', '2011','2012', '2013', '2014','2015', '2016', '2017','2018')
    GROUP BY kod_odvetvi, odvetvi, rok 
-
+   
 SELECT *
-FROM v_odvetvia vo 
+FROM v_odvetvia vo
+
 
 -- 1. varianta
 SELECT vo.kod_odvetvi, vo.odvetvi, vo.prumerna_mzda, vo.prumerna_mzda AS mzda_2006,
@@ -109,7 +110,7 @@ FROM v_odvetvia
 WHERE rok = '2018'
 GROUP BY kod_odvetvi, odvetvi, rok)v13 ON vo.kod_odvetvi = v13.kod_odvetvi
 
--- druhy pokus
+-- 2. varianta řešení - rychlejší
 SELECT kod_odvetvi, rok, prumerna_mzda, 
   LAG(prumerna_mzda)OVER (PARTITION BY kod_odvetvi ORDER BY rok) AS prumerna_mzda_pred_rokem,
   CASE 
@@ -119,4 +120,15 @@ SELECT kod_odvetvi, rok, prumerna_mzda,
   END AS vyvoj
 FROM v_odvetvia vo 
 
+
+
+SELECT kod_odvetvi, rok, round(avg(value),0) AS prumerna_mzda, 
+  LAG(round(avg(value),0)) OVER (PARTITION BY kod_odvetvi ORDER BY rok) AS prumerna_mzda_pred_rokem,
+  CASE 
+	  WHEN round(avg(value),0) > LAG(round(avg(value),0))OVER (PARTITION BY kod_odvetvi ORDER BY rok) THEN 'stoupala'
+      WHEN round(avg(value),0) < LAG(round(avg(value),0))OVER (PARTITION BY kod_odvetvi ORDER BY rok) THEN 'pokles'
+      ELSE 'rovnocena'
+  END AS vyvoj
+FROM t_eva_dolezalova_project_sql_primary_final tedpspf 
+GROUP BY kod_odvetvi, rok
 
