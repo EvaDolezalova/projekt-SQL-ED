@@ -1,39 +1,20 @@
 -- Rostou v průběhu let mzdy ve všech odvětvích, nebo v některých klesají
 
-/*Zemědělství, lesnictví, rybářství
-Těžba a dobývání
-Zpracovatelský průmysl
-Výroba a rozvod elektřiny, plynu, tepla a klimatiz. vzduchu
-Zásobování vodou; činnosti související s odpady a sanacemi
-Stavebnictví
-Velkoobchod a maloobchod; opravy a údržba motorových vozidel
-Doprava a skladování
-Ubytování, stravování a pohostinství
-Informační a komunikační činnosti
-Peněžnictví a pojišťovnictví
-Činnosti v oblasti nemovitostí
-Profesní, vědecké a technické činnosti
-Administrativní a podpůrné činnosti
-Veřejná správa a obrana; povinné sociální zabezpečení
-Vzdělávání
-Zdravotní a sociální péče
-Kulturní, zábavní a rekreační činnosti
-Ostatní činnosti*/
 
-
-   CREATE VIEW v_odvetvi_vse AS
-SELECT kod_odvetvi, odvetvi, rok, round(avg(value),0) AS prumerna_mzda
+CREATE VIEW v_odvetvi_vse AS
+SELECT DISTINCT kod_odvetvi, odvetvi, rok, round(avg(value),0) AS prumerna_mzda
   FROM t_eva_dolezalova_project_sql_primary_final tedpspf 
        WHERE tedpspf.kod_odvetvi BETWEEN 'A'AND 'S'
         AND rok IN ('2006', '2007', '2008','2009', '2010', '2011','2012', '2013', '2014','2015', '2016', '2017','2018')
-   GROUP BY kod_odvetvi, odvetvi, rok 
+   GROUP BY kod_odvetvi, odvetvi, rok
    
 SELECT *
-FROM v_odvetvia vo
+FROM v_odvetvi_vse vov 
 
 
 -- 1. varianta
-SELECT vo.kod_odvetvi, vo.odvetvi, vo.prumerna_mzda, vo.prumerna_mzda AS mzda_2006,
+SELECT vov.kod_odvetvi, vov.odvetvi, vov.prumerna_mzda,
+       vo1.prumerna_mzda AS mzda_2006,
        vo2.prumerna_mzda AS mzda_2007,
        vo3.prumerna_mzda AS mzda_2008,
        vo4.prumerna_mzda AS mzda_2009,
@@ -57,70 +38,64 @@ SELECT vo.kod_odvetvi, vo.odvetvi, vo.prumerna_mzda, vo.prumerna_mzda AS mzda_20
       			AND vo5.prumerna_mzda > vo4.prumerna_mzda
       			AND vo4.prumerna_mzda > vo3.prumerna_mzda
       			AND vo3.prumerna_mzda > vo2.prumerna_mzda
-      			AND vo2.prumerna_mzda > vo.prumerna_mzda) THEN 'růst mezi roky'
+      			AND vo2.prumerna_mzda > vo1.prumerna_mzda) THEN 'růst mezi roky'
             ELSE 'výkyvy'
             END zmena
-FROM v_odvetvia vo 
+FROM v_odvetvi_vse vov 
 LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
-FROM v_odvetvia 
+FROM v_odvetvi_vse 
+WHERE rok = '2006'
+GROUP BY kod_odvetvi, odvetvi, rok) vo1 ON vov.kod_odvetvi = vo1.kod_odvetvi 
+LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
+FROM v_odvetvi_vse 
 WHERE rok = '2007'
-GROUP BY kod_odvetvi, odvetvi, rok) vo2 ON vo.kod_odvetvi = vo2.kod_odvetvi 
+GROUP BY kod_odvetvi, odvetvi, rok) vo2 ON vov.kod_odvetvi = vo2.kod_odvetvi 
 LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
-FROM v_odvetvia 
+FROM v_odvetvi_vse
 WHERE rok = '2008'
-GROUP BY kod_odvetvi, odvetvi, rok)vo3 ON vo.kod_odvetvi = vo3.kod_odvetvi
+GROUP BY kod_odvetvi, odvetvi, rok)vo3 ON vov.kod_odvetvi = vo3.kod_odvetvi
 LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
-FROM v_odvetvia 
+FROM v_odvetvi_vse 
 WHERE rok = '2009'
-GROUP BY kod_odvetvi, odvetvi, rok)vo4 ON vo.kod_odvetvi = vo4.kod_odvetvi
+GROUP BY kod_odvetvi, odvetvi, rok)vo4 ON vov.kod_odvetvi = vo4.kod_odvetvi
 LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
-FROM v_odvetvia 
+FROM v_odvetvi_vse 
 WHERE rok = '2010'
-GROUP BY kod_odvetvi, odvetvi, rok)vo5 ON vo.kod_odvetvi = vo5.kod_odvetvi
+GROUP BY kod_odvetvi, odvetvi, rok)vo5 ON vov.kod_odvetvi = vo5.kod_odvetvi
 LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
-FROM v_odvetvia 
+FROM v_odvetvi_vse 
 WHERE rok = '2011'
-GROUP BY kod_odvetvi, odvetvi, rok)vo6 ON vo.kod_odvetvi = vo6.kod_odvetvi
+GROUP BY kod_odvetvi, odvetvi, rok)vo6 ON vov.kod_odvetvi = vo6.kod_odvetvi
 LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
-FROM v_odvetvia 
+FROM v_odvetvi_vse 
 WHERE rok = '2012'
-GROUP BY kod_odvetvi, odvetvi, rok)vo7 ON vo.kod_odvetvi = vo7.kod_odvetvi
+GROUP BY kod_odvetvi, odvetvi, rok)vo7 ON vov.kod_odvetvi = vo7.kod_odvetvi
 LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
-FROM v_odvetvia 
+FROM v_odvetvi_vse
 WHERE rok = '2013'
-GROUP BY kod_odvetvi, odvetvi, rok)vo8 ON vo.kod_odvetvi = vo8.kod_odvetvi
+GROUP BY kod_odvetvi, odvetvi, rok)vo8 ON vov.kod_odvetvi = vo8.kod_odvetvi
 LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
-FROM v_odvetvia 
+FROM v_odvetvi_vse
 WHERE rok = '2014'
-GROUP BY kod_odvetvi, odvetvi, rok)vo9 ON vo.kod_odvetvi = vo9.kod_odvetvi
+GROUP BY kod_odvetvi, odvetvi, rok)vo9 ON vov.kod_odvetvi = vo9.kod_odvetvi
 LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
-FROM v_odvetvia 
+FROM v_odvetvi_vse 
 WHERE rok = '2015'
-GROUP BY kod_odvetvi, odvetvi, rok)v10 ON vo.kod_odvetvi = v10.kod_odvetvi
+GROUP BY kod_odvetvi, odvetvi, rok)v10 ON vov.kod_odvetvi = v10.kod_odvetvi
 LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
-FROM v_odvetvia 
+FROM v_odvetvi_vse 
 WHERE rok = '2016'
-GROUP BY kod_odvetvi, odvetvi, rok)v11 ON vo.kod_odvetvi = v11.kod_odvetvi
+GROUP BY kod_odvetvi, odvetvi, rok)v11 ON vov.kod_odvetvi = v11.kod_odvetvi
 LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
-FROM v_odvetvia 
+FROM v_odvetvi_vse 
 WHERE rok = '2017'
-GROUP BY kod_odvetvi, odvetvi, rok)v12 ON vo.kod_odvetvi = v12.kod_odvetvi
+GROUP BY kod_odvetvi, odvetvi, rok)v12 ON vov.kod_odvetvi = v12.kod_odvetvi
 LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
-FROM v_odvetvia 
+FROM v_odvetvi_vse
 WHERE rok = '2018'
-GROUP BY kod_odvetvi, odvetvi, rok)v13 ON vo.kod_odvetvi = v13.kod_odvetvi
+GROUP BY kod_odvetvi, odvetvi, rok)v13 ON vov.kod_odvetvi = v13.kod_odvetvi
 
 -- 2. varianta řešení - rychlejší
-SELECT kod_odvetvi, rok, prumerna_mzda, 
-  LAG(prumerna_mzda)OVER (PARTITION BY kod_odvetvi ORDER BY rok) AS prumerna_mzda_pred_rokem,
-  CASE 
-	  WHEN prumerna_mzda > LAG(prumerna_mzda)OVER (PARTITION BY kod_odvetvi ORDER BY rok) THEN 'stoupala'
-      WHEN prumerna_mzda < LAG(prumerna_mzda)OVER (PARTITION BY kod_odvetvi ORDER BY rok) THEN 'pokles'
-      ELSE 'rovnocena'
-  END AS vyvoj
-FROM v_odvetvia vo 
-
-
 
 SELECT kod_odvetvi, rok, round(avg(value),0) AS prumerna_mzda, 
   LAG(round(avg(value),0)) OVER (PARTITION BY kod_odvetvi ORDER BY rok) AS prumerna_mzda_pred_rokem,
