@@ -105,8 +105,7 @@ FROM v_odvetvi_vse vov
  LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
 			FROM v_odvetvi_vse
 			WHERE rok = '2018'
-			GROUP BY kod_odvetvi, odvetvi, rok)v13 
-	ON vov.kod_odvetvi = v13.kod_odvetvi
+			GROUP BY kod_odvetvi, odvetvi, rok)v13 ON vov.kod_odvetvi = v13.kod_odvetvi
 HAVING prumerna_mzda = mzda_2006
 
 -- 2. varianta řešení - rychlejší
