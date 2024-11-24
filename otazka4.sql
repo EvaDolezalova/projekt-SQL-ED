@@ -1,6 +1,7 @@
 
 -- Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší než růst mezd (větší než 10 %)?
 -- zatím za bez ohledu na produkt a odvětví
+-- pokud by se jednalo o nárůst, tak nebylo nikde překročeno 10%, pouze mezi rok 2008 a 2009 je rozdíl větší, jak 10%, ale je dán tím, že je výrazný pokles v cenách 
 
 
  CREATE VIEW v_prumerne_ceny_mzdy as
