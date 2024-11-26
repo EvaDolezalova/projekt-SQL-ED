@@ -3,15 +3,33 @@
 -- Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách potravin či mzdách ve stejném nebo násdujícím roce výraznějším růstem?
 -- připojit 2.tabulku z důvodu HDP a vybrat tam pouze ČR
 
-SELECT *
-FROM v_prumerne_ceny_mzdy vpcm 
+-- využití view z výsledku otázky 4
 
+
+SELECT *
+FROM v_prirustky_cen_mezd vpcm 
+
+CREATE VIEW v_prirustky_HDP as
 SELECT tedpssf.zeme, 
 	   tedpssf.HDP, 
-	   vpcm.prumer_cena,
-	   vpcm.prumer_mzda,
-	   vpcm.rok,
-	   vpcm.rok_nasledujici 
+	   tedpssf.rok,
+	   tedpssf.rok+1 AS rok_nasledujici
 FROM t_eva_dolezalova_project_sql_secondary_final tedpssf 
-LEFT JOIN v_prumerne_ceny_mzdy vpcm ON vpcm.rok = tedpssf.rok 
-WHERE tedpssf.zeme = 'Czech Republic'
+      WHERE tedpssf.zeme = 'Czech Republic'
+      
+ 
+SELECT vpcm.rok,
+	   vpcm.rok_nasledujici, 
+	   vph.HDP, 
+	   vph2.HDP2,
+	   vpcm.prumerny_rocni_narust_cena,
+	   vpcm.prumerny_rocni_narust_mzdy,
+	  Round (avg(((vph2.HDP2-vph.HDP)/vph.HDP)*100),2) AS prumerny_rocni_narust_HDP
+FROM v_prirustky_hdp vph 
+     LEFT JOIN v_prirustky_cen_mezd vpcm 
+          ON vpcm.rok = vph.rok 
+     LEFT JOIN (SELECT HDP AS HDP2, rok, rok_nasledujici FROM v_prirustky_hdp) vph2
+          ON vph.rok_nasledujici = vph2.rok
+    GROUP BY rok, prumerny_rocni_narust_cena, prumerny_rocni_narust_mzdy
+
+
