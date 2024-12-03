@@ -28,7 +28,7 @@ FROM v_prirustky_hdp vph
           ON vpcm.rok = vph.rok 
      LEFT JOIN (SELECT HDP AS HDP2, rok, rok_nasledujici FROM v_prirustky_hdp) vph2
           ON vph.rok_nasledujici = vph2.rok
-    GROUP BY rok, prumerny_rocni_narust_cena, prumerny_rocni_narust_mzdy
+    GROUP BY rok, prumerny_rocni_narust_cena, prumerny_rocni_narust_mzdy;
 
 
     

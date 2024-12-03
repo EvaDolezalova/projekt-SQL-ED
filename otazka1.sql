@@ -6,7 +6,7 @@ SELECT DISTINCT kod_odvetvi, odvetvi, rok, round(avg(value),0) AS prumerna_mzda
   FROM t_eva_dolezalova_project_sql_primary_final tedpspf 
        WHERE tedpspf.kod_odvetvi BETWEEN 'A'AND 'S'
         AND rok IN ('2006', '2007', '2008','2009', '2010', '2011','2012', '2013', '2014','2015', '2016', '2017','2018')
-   GROUP BY kod_odvetvi, odvetvi, rok
+   GROUP BY kod_odvetvi, odvetvi, rok;
    
 SELECT *
 FROM v_odvetvi_vse vov 
@@ -106,11 +106,11 @@ FROM v_odvetvi_vse vov
 			FROM v_odvetvi_vse
 			WHERE rok = '2018'
 			GROUP BY kod_odvetvi, odvetvi, rok)v13 ON vov.kod_odvetvi = v13.kod_odvetvi
-HAVING prumerna_mzda = mzda_2006
+HAVING prumerna_mzda = mzda_2006;
 
 -- 2. varianta řešení - rychlejší
 
-SELECT kod_odvetvi, rok, round(avg(value),0) AS prumerna_mzda, 
+SELECT kod_odvetvi, rok, round(avg(value),0) AS prumerna_mzda,
   LAG(round(avg(value),0)) OVER (PARTITION BY kod_odvetvi ORDER BY rok) AS prumerna_mzda_pred_rokem,
   CASE 
 	  WHEN round(avg(value),0) > LAG(round(avg(value),0))OVER (PARTITION BY kod_odvetvi ORDER BY rok) THEN 'stoupala'
@@ -118,5 +118,6 @@ SELECT kod_odvetvi, rok, round(avg(value),0) AS prumerna_mzda,
       ELSE 'rovnocena'
   END AS vyvoj
 FROM t_eva_dolezalova_project_sql_primary_final tedpspf 
-GROUP BY kod_odvetvi, rok
+GROUP BY kod_odvetvi, rok;
+
 
