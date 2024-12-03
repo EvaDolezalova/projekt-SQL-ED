@@ -20,8 +20,6 @@ FROM t_eva_dolezalova_project_sql_secondary_final tedpssf
  
 SELECT vpcm.rok,
 	   vpcm.rok_nasledujici, 
-	   vph.HDP, 
-	   vph2.HDP2,
 	   vpcm.prumerny_rocni_narust_cena,
 	   vpcm.prumerny_rocni_narust_mzdy,
 	  Round (avg(((vph2.HDP2-vph.HDP)/vph.HDP)*100),2) AS prumerny_rocni_narust_HDP
@@ -33,3 +31,4 @@ FROM v_prirustky_hdp vph
     GROUP BY rok, prumerny_rocni_narust_cena, prumerny_rocni_narust_mzdy
 
 
+    

@@ -10,9 +10,9 @@
  		rok,
  		rok+1 AS rok_nasledujici
  FROM t_eva_dolezalova_project_sql_primary_final tedpspf 
- GROUP BY rok, rok_nasledujici
+ GROUP BY rok, rok_nasledujici;
  
- 
+ CREATE VIEW v_prirustky_cen_mezd AS 
  SELECT vpcm.rok, 
  		vpcm.rok_nasledujici,
  		vpcm.prumer_mzda,
@@ -29,7 +29,7 @@
  LEFT JOIN 
  (SELECT prumer_cena AS prumer_cena_nasledujici, rok, rok_nasledujici, prumer_mzda AS prumer_mzda_nasledujici FROM v_prumerne_ceny_mzdy) vpcm2 
  ON vpcm.rok_nasledujici = vpcm2.rok  
- GROUP BY rok,vpcm2.prumer_cena_nasledujici,vpcm2.prumer_mzda_nasledujici 
+ GROUP BY rok,vpcm2.prumer_cena_nasledujici,vpcm2.prumer_mzda_nasledujici;
 
  
   
