@@ -1,7 +1,7 @@
 
 -- Existuje rok, ve kterém byl meziroční nárůst cen potravin výrazně vyšší než růst mezd (větší než 10 %)?
--- pokud by se jednalo o nárůst, tak nebylo nikde překročeno 10%, pouze mezi rok 2008 a 2009 je rozdíl větší, jak 10%, ale je dán tím, že je výrazný pokles v cenách 
--- použito view - možnost použít i CTE funkce WITH - lepší pro datové soubory z pohledu místa
+
+-- 1.způsob výpočtu
 
  CREATE VIEW v_prumerne_ceny_mzdy as
  SELECT round(avg(tedpspf.cena),2)AS prumer_cena,
@@ -37,7 +37,34 @@
 
  
   
+ -- 2. způsob výpočtu 
  
- SELECT rok, avg(cena) AS prumerna_cena
- FROM t_eva_dolezalova_project_sql_primary_final tedpspf 
- GROUP BY rok
+ WITH 
+ 	cte_prumerne_ceny_produktu AS (
+  SELECT AVG(cena) AS prumer_cena, 
+		 rok,
+		 LAG(AVG(cena)) OVER (ORDER BY rok) AS prumer_cena_predchozi_rok,
+		 Round (((AVG(cena) - LAG(AVG(cena)) OVER (ORDER BY rok))/LAG(AVG(cena)) OVER (ORDER BY rok)*100),2) AS prumerny_rocni_narust_cen
+  FROM t_eva_dolezalova_project_sql_primary_final tedpspf 
+  GROUP BY rok
+	), 
+	cte_prumerne_mzdy AS (
+		SELECT 
+			AVG(value) AS prumer_mzda,
+			rok,
+			LAG(AVG(value)) OVER (ORDER BY rok) AS prumer_mzda_predchozi_rok,
+			Round (((AVG(value) - LAG(AVG(value)) OVER (ORDER BY rok))/LAG(AVG(value)) OVER (ORDER BY rok)*100),2) AS prumerny_rocni_narust_mezd
+		FROM t_eva_dolezalova_project_sql_primary_final tedpspf 
+		GROUP BY rok
+	)
+SELECT 
+	cpcp.rok,
+	cpcp.prumerny_rocni_narust_cen,
+	cpm.rok,
+	cpm.prumerny_rocni_narust_mezd,
+	(cpcp.prumerny_rocni_narust_cen - cpm.prumerny_rocni_narust_mezd) AS rozdíl,
+	CASE WHEN (ABS(cpcp.prumerny_rocni_narust_cen - cpm.prumerny_rocni_narust_mezd) > 10) 
+ 			then 'vyšší' ELSE 'nižší' END 'vysledek'
+FROM cte_prumerne_ceny_produktu cpcp
+JOIN cte_prumerne_mzdy cpm ON cpcp.rok = cpm.rok;
+
