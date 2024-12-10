@@ -45,67 +45,67 @@ FROM v_odvetvi_vse vov
  LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
 			FROM v_odvetvi_vse 
 			WHERE rok = '2006'
-			GROUP BY kod_odvetvi, odvetvi, rok, prumerna_mzda) vo1 
+			) vo1 
 	ON vov.kod_odvetvi = vo1.kod_odvetvi 
  LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
 			FROM v_odvetvi_vse 
 			WHERE rok = '2007'
-			GROUP BY kod_odvetvi, odvetvi, rok) vo2 
+			) vo2 
 	ON vov.kod_odvetvi = vo2.kod_odvetvi 
  LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
 			FROM v_odvetvi_vse
 			WHERE rok = '2008'
-			GROUP BY kod_odvetvi, odvetvi, rok)vo3 
+			)vo3 
 	ON vov.kod_odvetvi = vo3.kod_odvetvi
  LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
 			FROM v_odvetvi_vse 
-			WHERE rok = '2009'
-			GROUP BY kod_odvetvi, odvetvi, rok)vo4 
+			)vo4 
 	ON vov.kod_odvetvi = vo4.kod_odvetvi
  LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
 			FROM v_odvetvi_vse 
 			WHERE rok = '2010'
-			GROUP BY kod_odvetvi, odvetvi, rok)vo5 
+			)vo5 
 	ON vov.kod_odvetvi = vo5.kod_odvetvi
  LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
 			FROM v_odvetvi_vse 
 			WHERE rok = '2011'
-			GROUP BY kod_odvetvi, odvetvi, rok)vo6
+			)vo6
 	ON vov.kod_odvetvi = vo6.kod_odvetvi
  LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
 			FROM v_odvetvi_vse 
 			WHERE rok = '2012'
-			GROUP BY kod_odvetvi, odvetvi, rok)vo7 
+			)vo7 
 	ON vov.kod_odvetvi = vo7.kod_odvetvi
  LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
 			FROM v_odvetvi_vse
 			WHERE rok = '2013'
-			GROUP BY kod_odvetvi, odvetvi, rok)vo8 
+			)vo8 
 	ON vov.kod_odvetvi = vo8.kod_odvetvi
  LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
 			FROM v_odvetvi_vse
 			WHERE rok = '2014'
-			GROUP BY kod_odvetvi, odvetvi, rok)vo9 
+			)vo9 
 	ON vov.kod_odvetvi = vo9.kod_odvetvi
  LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
 			FROM v_odvetvi_vse 
 			WHERE rok = '2015'
-			GROUP BY kod_odvetvi, odvetvi, rok)v10 
+			)v10 
 	ON vov.kod_odvetvi = v10.kod_odvetvi
  LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
 			FROM v_odvetvi_vse 
 			WHERE rok = '2016'
-			GROUP BY kod_odvetvi, odvetvi, rok)v11 
+			)v11 
 	ON vov.kod_odvetvi = v11.kod_odvetvi
  LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
 			FROM v_odvetvi_vse 
 			WHERE rok = '2017'
-			GROUP BY kod_odvetvi, odvetvi, rok)v12 
+			)v12 
 	ON vov.kod_odvetvi = v12.kod_odvetvi
  LEFT JOIN (SELECT kod_odvetvi, odvetvi, rok, prumerna_mzda 
 			FROM v_odvetvi_vse
 			WHERE rok = '2018'
-			GROUP BY kod_odvetvi, odvetvi, rok)v13 ON vov.kod_odvetvi = v13.kod_odvetvi
+			)v13 
+	ON vov.kod_odvetvi = v13.kod_odvetvi
 HAVING prumerna_mzda = mzda_2006;
 
 -- 2. varianta řešení - rychlejší
