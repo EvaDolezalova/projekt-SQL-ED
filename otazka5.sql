@@ -69,5 +69,5 @@ SELECT
 	cph.prumerny_rocni_narust_HDP
 FROM cte_prumerne_ceny_produktu cpcp
 	JOIN cte_prumerne_mzdy cpm ON cpcp.rok = cpm.rok
-	JOIN cte_prumerne_HDP cph ON cpcp.rok = cph.rok
-   WHERE prumerny_rocni_narust_HDP > 5;
+	JOIN cte_prumerne_HDP cph ON cpcp.rok = cph.rok;
+   -- WHERE prumerny_rocni_narust_HDP > 5;
