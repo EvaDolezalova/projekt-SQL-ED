@@ -38,7 +38,7 @@ V roce 2018 bylo možné koupit 1342 kg chleba a 1642 litrů mléka za průměrn
 
 ### **Otázka č. 3** ###
 
-Nejpomalejší zdražování za celé období (tedy nejnižší percentuální meziroční nárůst) zaznamenaly banány 0,81 %, naopak papriky zdražují nejrychleji cca 7,29 % nárůst mezi lety sledovaného období. 
+Nejpomalejší zdražování za celé období *(tedy nejnižší percentuální meziroční nárůst)* zaznamenaly banány 0,81 %, naopak papriky zdražují nejrychleji cca 7,29 % nárůst mezi lety sledovaného období. 
 
 Meziroční pokles zaznamenaly 2 potraviny, a sice cukr krystal až 1,92 % pokles a rajská jablka kulatá 0,74 % pokles.
 
@@ -49,13 +49,13 @@ Cukr zaznamenal nejvyšší pokles ceny v roce 2018 o 21,1 % oproti roku 2017
 
 ### **Otázka č. 4** ###
 
-Dle porovnání meziročního nárůstu cen potravin (bez ohledu na produkty) a mezd nebyl zaznamenán v žádném roce výrazně vyšší nárůst cen potravin než byl růst mezd.
+Dle porovnání meziročního nárůstu cen potravin *(bez ohledu na produkty)* a mezd nebyl zaznamenán v žádném roce výrazně vyšší nárůst cen potravin než byl růst mezd.
 
-V roce 2012 rostly ceny potravin rychleji než mzdy, a to o 3,9 % více (potraviny +6,94 %, mzdy +3,04 %) než v roce 2011.
+V roce 2012 rostly ceny potravin rychleji než mzdy, a to o 3,9 % více *(potraviny +6,94 %, mzdy +3,04 %)* než v roce 2011.
 
 V roce 2017 byl růst cen potravin nejvyšší, a sice + 9,98 %, ale i mzdy v tomto roce měly vysoký nárůst + 6,29 %, tj. rozdíl 3,69 %.
 
-Naopak v roce 2010 byl zaznamenán nejnižší rozdíl růstu cen oproti mzdám 0,08 % (potraviny +1,76 %, mzdy +1,68 %).
+Naopak v roce 2010 byl zaznamenán nejnižší rozdíl růstu cen oproti mzdám 0,08 % *(potraviny +1,76 %, mzdy +1,68 %)*.
 
 Jediným rokem, kdy je rozdíl mezi cenami potravin a mzdami vyšší než 10% je rok 2009 ve srovnání s rokem 2008, ale v daný rok byl zaznamenán výrazný pokles cen potravin, a to o - 6,79 %, naopak mzdy rostly +4,05 %.
 
@@ -65,11 +65,11 @@ Rovněž v roce 2013 je zaznamenán vysoký rozdíl cen potravin a mezd 7,12 %, 
 
 Z dostupných údajů vyplývá, že výrazný nárůst HDP neměl přímý vliv na výrazný růst cen či mezd.
  
-Lze však říct, že na začátku sledovaného období vedlo výrazné zvýšení HDP v roce 2007 k obdobnému růstu cen i mezd v následujícím roce (+6,41 %, +7,01 %).
+Lze však říct, že na začátku sledovaného období vedlo výrazné zvýšení HDP v roce 2007 k obdobnému růstu cen i mezd v následujícím roce *(+6,41 %, +7,01 %)*.
 
-Podobně i výrazný pokles HDP v roce 2009 vedl k nižšímu, ale stále srovnatelnému růstu cen a mezd v roce následujícím (+1,76 %, +1,68 %).
+Podobně i výrazný pokles HDP v roce 2009 vedl k nižšímu, ale stále srovnatelnému růstu cen a mezd v roce následujícím *(+1,76 %, +1,68 %)*.
 
-Ale tento trend se v posledních letech již neprojevuje. V dalších letech se např. zvýšení HDP v roce 2015 projevuje v následujícím roce spíše na rychlejším růstu mezd (+3,65 %), než cen, u kterých je zaznamenán pokles (-1,12 %).
+Ale tento trend se v posledních letech již neprojevuje. V dalších letech se např. zvýšení HDP v roce 2015 projevuje v následujícím roce spíše na rychlejším růstu mezd *(+3,65 %)*, než cen, u kterých je zaznamenán pokles *(-1,12 %)*.
 
 
 
